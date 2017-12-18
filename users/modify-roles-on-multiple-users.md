@@ -12,6 +12,6 @@ wp db query "select ID FROM os_users as user LEFT JOIN os_usermeta as um on um.u
 
 `| xargs -n1 -I %` - this is used to pipe the results to `xargs` which will take each line of the result, and assign it to a % placeholder.
 
-`sh -c ' - this is basically saying I want to run a shell command and the command(s) go within quotes.  I am doing this here because I want to chain commands together for each user in the results.
+`sh -c` - this is basically saying I want to run a shell command and the command(s) go within quotes.  I am doing this here because I want to chain commands together for each user in the results.
 
 `'wp user remove-role % s2member_level1 ; wp user remove-role % s2member_level2 ; wp user remove-role % s2member_level3 ; wp user set-role % subscriber'` - Here I'm simply chaining all the commands together.  Since I wasn't sure what s2member role each user would have, I simply chained through removing all roles.  I used the `;` delimiter here for each command because that indicates I want the subsequent command in the chain to run regardless of whether there was an error or not.  If I wanted the subsequent commands to _not_ run on error, I'd just use `&&` as the delimiter instead.
